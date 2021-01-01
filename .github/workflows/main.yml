@@ -28,5 +28,5 @@ jobs:
         with:
           node-version: 12.x
 
-      - name: npm install
-        run: npm install --production
+      - name: show directory
+        run: pwd
