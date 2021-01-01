@@ -20,13 +20,19 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v2
 
-      - name: "Change to Angular directory"
-        run: cd ng-ftn
-
       - name: "Setup Node.js"
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
+
+      - name: show directory
+        run: pwd
+
+      - name: list directory
+        run: ls -l
+
+      - name: "Change to Angular directory"
+        run: cd ng-ftn
 
       - name: show directory
         run: pwd
