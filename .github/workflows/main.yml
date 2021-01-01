@@ -30,3 +30,6 @@ jobs:
 
       - name: show directory
         run: pwd
+
+      - name: list directory
+        run: ls -l
