@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app-component/app.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SettingsComponent
+    SettingsComponent,
+    GameComponent
   ],
   imports: [
     AppRoutingModule,
