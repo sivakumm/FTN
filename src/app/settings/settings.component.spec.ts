@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -9,6 +10,9 @@ describe('SettingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        ReactiveFormsModule
+      ],
       declarations: [ SettingsComponent ]
     })
     .compileComponents();
@@ -65,5 +69,43 @@ describe('SettingsComponent', () => {
     const buttons = fixture.debugElement.queryAll(By.css('button'));
     const removeBtns = buttons.filter(btn => btn.nativeElement.innerHTML.includes('×'));
     expect(removeBtns.every(btn => btn.attributes.disabled !== undefined)).toBeTrue();
+  });
+
+  it(`should enable all remove player buttons if there are at least 4 players`, () => {
+    component.addPlayer();
+    fixture.detectChanges();
+    const buttons = fixture.debugElement.queryAll(By.css('button'));
+    const removeBtns = buttons.filter(btn => btn.nativeElement.innerHTML.includes('×'));
+    expect(removeBtns.every(btn => btn.attributes.disabled === undefined)).toBeTrue();
+  });
+
+  it(`should add a player on click on 'add player' button`, () => {
+    const buttons = fixture.debugElement.queryAll(By.css('button'));
+    const addBtn = buttons.find(btn => btn.nativeElement.textContent.toLowerCase().includes('add player'));
+    addBtn?.nativeElement.click();
+    fixture.detectChanges();
+    const inputs = fixture.debugElement.queryAll(By.css('input'));
+    const nameInputs = inputs.filter(inp => inp.nativeElement.id.includes('player-name'));
+    expect(nameInputs.length).toBe(4);
+  });
+
+  it(`should remove a player on click on remove player button`, () => {
+    component.addPlayer();
+    fixture.detectChanges();
+    let buttons = fixture.debugElement.queryAll(By.css('button'));
+    let removeBtns = buttons.filter(btn => btn.nativeElement.innerHTML.includes('×'));
+    removeBtns[0].nativeElement.click();
+    fixture.detectChanges();
+    buttons = fixture.debugElement.queryAll(By.css('button'));
+    removeBtns = buttons.filter(btn => btn.nativeElement.innerHTML.includes('×'));
+    expect(removeBtns.length).toBe(3);
+  });
+
+  it(`should enable start button, if at least 3 player names are providen with valid inputs`, () => {
+    component.playerNames.setValue(['Spieler 1', 'Spieler 2', 'Spieler 3']);
+    fixture.detectChanges();
+    const buttons = fixture.debugElement.queryAll(By.css('button'));
+    const startBtn = buttons.find(btn => btn.nativeElement.textContent.toLowerCase().includes('start'));
+    expect(startBtn?.attributes.disabled).toBeUndefined();
   });
 });

@@ -6,19 +6,38 @@
   </div>
   <div class="row">
     <div class="col">
-      <form>
+      <form [formGroup]="playersForm" (ngSubmit)="onSubmit()">
         <button class="btn btn-primary mt-4 w-100" type="button" (click)="addPlayer()">
           <i class="fas fa-user-plus me-2"></i>
           Add Player
         </button>
-        <div *ngFor="let player of players; let playerIdx = index;" class="row my-4">
+        <div formArrayName="playerNames" *ngFor="let player of playerNames.controls; let playerIdx = index;" class="row my-4">
           <div class="input-group">
-            <label class="form-label col-12 col-md-3" [for]="'player-name-' + playerIdx">Player {{ playerIdx + 1 }}</label>
-            <input class="form-control col" type="text" [id]="'player-name-' + playerIdx" placeholder="Player Name" />
-            <button class="btn btn-danger" type="button" [disabled]="players.length < 4" (click)="removePlayer(playerIdx)">&times;</button>
+            <label
+              class="form-label col-12 col-md-3"
+              [for]="'player-name-' + playerIdx"
+            >
+              Player {{ playerIdx + 1 }}
+            </label>
+            <input
+              class="form-control col"
+              type="text"
+              [id]="'player-name-' + playerIdx"
+              placeholder="Player Name"
+              [formControlName]="playerIdx"
+            />
+            <button
+              class="btn btn-danger"
+              type="button"
+              [disabled]="playerNames.length < 4"
+              (click)="removePlayer(playerIdx)"
+            >
+              &times;
+            </button>
           </div>
         </div>
-        <button class="btn btn-primary mt-4 w-100" type="button" [disabled]="players.length < 4">
+        <hr />
+        <button class="btn btn-primary w-100" type="submit" [disabled]="!isValidInputs()">
           <i class="fas fa-play-circle me-2"></i>Start
         </button>
       </form>

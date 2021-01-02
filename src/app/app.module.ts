@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app-component/app.component';
 import { SettingsComponent } from './settings/settings.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,8 +12,10 @@ import { SettingsComponent } from './settings/settings.component';
     SettingsComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

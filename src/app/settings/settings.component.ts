@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -7,20 +8,35 @@ import { Component } from '@angular/core';
 })
 export class SettingsComponent {
 
-  players = [
-    { name: '' },
-    { name: '' },
-    { name: '' }
-  ];
+  playersForm: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {
+    this.playersForm = fb.group({
+      playerNames: fb.array([
+        fb.control(''),
+        fb.control(''),
+        fb.control('')
+      ])
+    });
+  }
+
+  get playerNames(): FormArray {
+    return this.playersForm.get('playerNames') as FormArray;
+  }
 
   addPlayer(): void {
-    this.players.push({ name: '' });
+    this.playerNames.push(this.fb.control(''));
   }
 
   removePlayer(playerIdx: number): void {
-    this.players.splice(playerIdx, 1);
+    this.playerNames.removeAt(playerIdx);
   }
 
+  isValidInputs(): boolean {
+    return this.playerNames.length > 2 && this.playerNames.value.every((name: string) => name.length > 0);
+  }
+
+  onSubmit(): void {
+    console.log(this.playersForm);
+  }
 }
