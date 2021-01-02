@@ -1,1 +1,15 @@
-<p>settings works!</p>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col">
+      <h3 class="text-center">Settings</h3>
+    </div>
+  </div>
+  <form>
+    <div *ngFor="let player of players; let idx = index;" class="row my-4">
+      <div class="col">
+        <label [for]="'player-name-' + idx" class="form-label">Player {{ idx + 1 }}</label>
+        <input type="text" class="form-control" [id]="'player-name-' + idx" placeholder="Player Name" />
+      </div>
+    </div>
+  </form>
+</div>
