@@ -15,4 +15,12 @@ export class SettingsComponent {
 
   constructor() { }
 
+  addPlayer(): void {
+    this.players.push({ name: '' });
+  }
+
+  removePlayer(playerIdx: number): void {
+    this.players.splice(playerIdx, 1);
+  }
+
 }

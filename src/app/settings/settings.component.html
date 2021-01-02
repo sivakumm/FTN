@@ -7,15 +7,15 @@
   <div class="row">
     <div class="col">
       <form>
-        <button class="btn btn-primary mt-4 w-100" type="button">
+        <button class="btn btn-primary mt-4 w-100" type="button" (click)="addPlayer()">
           <i class="fas fa-user-plus me-2"></i>
           Add Player
         </button>
-        <div *ngFor="let player of players; let idx = index;" class="row my-4">
+        <div *ngFor="let player of players; let playerIdx = index;" class="row my-4">
           <div class="input-group">
-            <label class="form-label col-12 col-md-3" [for]="'player-name-' + idx">Player {{ idx + 1 }}</label>
-            <input class="form-control col" type="text" [id]="'player-name-' + idx" placeholder="Player Name" />
-            <button class="btn btn-danger" type="button" [disabled]="players.length < 4">&times;</button>
+            <label class="form-label col-12 col-md-3" [for]="'player-name-' + playerIdx">Player {{ playerIdx + 1 }}</label>
+            <input class="form-control col" type="text" [id]="'player-name-' + playerIdx" placeholder="Player Name" />
+            <button class="btn btn-danger" type="button" [disabled]="players.length < 4" (click)="removePlayer(playerIdx)">&times;</button>
           </div>
         </div>
         <button class="btn btn-primary mt-4 w-100" type="button" [disabled]="players.length < 4">
