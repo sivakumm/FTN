@@ -5,6 +5,10 @@
     </div>
   </div>
   <form>
+    <button class="btn btn-primary mt-4 w-100" type="button">
+      <i class="fas fa-user-plus me-2"></i>
+      Add Player
+    </button>
     <div *ngFor="let player of players; let idx = index;" class="row my-4">
       <div class="col">
         <label [for]="'player-name-' + idx" class="form-label">Player {{ idx + 1 }}</label>
