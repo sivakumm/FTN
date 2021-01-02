@@ -1,0 +1,22 @@
+.selection-container {
+  display: grid;
+  position: relative;
+  top: 0;
+  height: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.selection-item {
+  justify-self: center;
+  text-align: center;
+  height: 100px;
+  width: 100px;
+}
+
+.selection-button {
+  height: 100%;
+  width: 100%;
+}

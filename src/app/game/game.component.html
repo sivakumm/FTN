@@ -1,7 +1,25 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col">
-      <h3 class="text-center">GAME</h3>
+      <h3 class="text-center">Round {{ round }}</h3>
+      <h6 class="text-center">{{ cards }} card{{ cards > 1 ? 's' : '' }}</h6>
+      <!-- <p>{{ settings | json }}</p> -->
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col">
+      <h4 class="text-center">Announcement of {{ settings.players[playerIdx].name }}</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="selection-container">
+        <div class="selection-item" *ngFor="let number of choises()">
+          <button class="btn bg-secondary text-white fw-bold fs-3 border border-dark border-3 selection-button">
+            {{ number }}
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
