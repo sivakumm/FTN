@@ -22,9 +22,11 @@
             <input
               class="form-control col"
               type="text"
-              [id]="'player-name-' + playerIdx"
               placeholder="Player Name"
+              required
+              [id]="'player-name-' + playerIdx"
               [formControlName]="playerIdx"
+              [class.is-invalid]="player.touched && player.invalid"
             />
             <button
               class="btn btn-danger"
@@ -35,6 +37,7 @@
               &times;
             </button>
           </div>
+          <div *ngIf="player.touched && player.invalid" class="text-danger">Name is required!</div>
         </div>
         <hr />
         <button class="btn btn-primary w-100" type="submit" [disabled]="!isValidInputs()">

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -16,7 +16,7 @@ export class SettingsComponent {
         fb.control(''),
         fb.control(''),
         fb.control('')
-      ])
+      ], Validators.required)
     });
   }
 
@@ -37,6 +37,6 @@ export class SettingsComponent {
   }
 
   onSubmit(): void {
-    console.log(this.playersForm);
+    console.log(this.playerNames.status);
   }
 }
