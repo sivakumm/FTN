@@ -4,16 +4,24 @@
       <h3 class="text-center">Settings</h3>
     </div>
   </div>
-  <form>
-    <button class="btn btn-primary mt-4 w-100" type="button">
-      <i class="fas fa-user-plus me-2"></i>
-      Add Player
-    </button>
-    <div *ngFor="let player of players; let idx = index;" class="row my-4">
-      <div class="col">
-        <label [for]="'player-name-' + idx" class="form-label">Player {{ idx + 1 }}</label>
-        <input type="text" class="form-control" [id]="'player-name-' + idx" placeholder="Player Name" />
-      </div>
+  <div class="row">
+    <div class="col">
+      <form>
+        <button class="btn btn-primary mt-4 w-100" type="button">
+          <i class="fas fa-user-plus me-2"></i>
+          Add Player
+        </button>
+        <div *ngFor="let player of players; let idx = index;" class="row my-4">
+          <div class="input-group">
+            <label class="form-label col-12 col-md-3" [for]="'player-name-' + idx">Player {{ idx + 1 }}</label>
+            <input class="form-control col" type="text" [id]="'player-name-' + idx" placeholder="Player Name" />
+            <button class="btn btn-danger" type="button" [disabled]="players.length < 4">&times;</button>
+          </div>
+        </div>
+        <button class="btn btn-primary mt-5 w-100" type="button" [disabled]="players.length < 4">
+          <i class="fas fa-play-circle me-2"></i>Start
+        </button>
+      </form>
     </div>
-  </form>
+  </div>
 </div>
