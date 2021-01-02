@@ -3,4 +3,5 @@ export interface IPlayer {
   announcement: number;
   actual: number;
   pointsHistory: number[];
+  currentPoints?: number;
 }

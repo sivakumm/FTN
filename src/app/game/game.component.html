@@ -3,22 +3,47 @@
     <div class="col">
       <h3 class="text-center">Round {{ round }}</h3>
       <h6 class="text-center">{{ cards }} card{{ cards > 1 ? 's' : '' }}</h6>
-      <!-- <p>{{ settings | json }}</p> -->
     </div>
   </div>
   <div class="row mt-5">
     <div class="col">
-      <h4 class="text-center">Announcement of {{ settings.players[playerIdx].name }}</h4>
+      <h4 *ngIf="gameProcess < 2" class="text-center">{{ gameProcess === 0 ? 'Announcement' : 'Won decks' }} of {{ settings.players[playerIdx].name }}</h4>
+      <h4 *ngIf="gameProcess === 2" class="text-center">Overview</h4>
     </div>
   </div>
-  <div class="row">
+  <div *ngIf="gameProcess < 2" class="row">
     <div class="col">
       <div class="selection-container">
         <div class="selection-item" *ngFor="let number of choises()">
-          <button class="btn bg-secondary text-white fw-bold fs-3 border border-dark border-3 selection-button">
+          <button
+            class="btn bg-secondary text-white fw-bold fs-3 border border-dark border-3 selection-button"
+            (click)="makeChoise(number)"
+            [disabled]="disabledNr === number"
+          >
             {{ number }}
           </button>
         </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="gameProcess === 2" class="row">
+    <div class="col">
+      <table class="table table-striped my-3">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let player of settings.players">
+            <td>{{ player.name }}</td>
+            <td>{{ player.currentPoints }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center">
+        <button class="btn btn-primary" (click)="startNextRound()">Next round</button>
       </div>
     </div>
   </div>
