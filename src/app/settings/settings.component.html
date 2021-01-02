@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col">
-      <form [formGroup]="playersForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
         <button class="btn btn-primary mt-4 w-100" type="button" (click)="addPlayer()">
           <i class="fas fa-user-plus me-2"></i>
           Add Player
@@ -38,6 +38,49 @@
             </button>
           </div>
           <div *ngIf="player.touched && player.invalid" class="text-danger">Name is required!</div>
+        </div>
+        <hr />
+        <div class="row my-4">
+          <div class="input-group">
+            <label
+              class="form-label col-12 col-md-3"
+              for="max-cards-count"
+            >
+              Maximale Karten
+            </label>
+            <span class="input-group-text px-3" id="max-cards-display">{{ maxCards.value }}</span>
+            <input
+              class=" form-range col px-3"
+              type="range"
+              id="max-cards-count"
+              step="1"
+              min="1"
+              [max]="(NR_OF_CARDS / playerNames.length)"
+              [formControl]="maxCards"
+            />
+          </div>
+        </div>
+        <div class="row my-4">
+          <div class="">
+            <label
+              class="form-check-label col-11"
+              for="highest-double"
+            >
+              Höchste Karte doppelt spielen
+            </label>
+            <input class="form-check-input col" type="checkbox" id="highest-double" [formControl]="highestDouble">
+          </div>
+        </div>
+        <div class="row my-4">
+          <div class="">
+            <label
+              class="form-check-label col-11"
+              for="lowest-double"
+            >
+              Niedrigste Karte doppelt spielen
+            </label>
+            <input class="form-check-input col" type="checkbox" id="lowest-double" [formControl]="lowestDouble">
+          </div>
         </div>
         <hr />
         <button class="btn btn-primary w-100" type="submit" [disabled]="!isValidInputs()">
