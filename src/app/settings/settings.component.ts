@@ -1,3 +1,4 @@
+import { IPlayer } from './../interfaces/player.interface';
 import { ISetting } from './../interfaces/setting.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
@@ -25,7 +26,7 @@ export class SettingsComponent implements OnInit {
       this.maxCards.setValue(settings.maxCards);
       this.highestDouble.setValue(settings.highestDouble);
       this.lowestDouble.setValue(settings.lowestDouble);
-      this.playerNames.setValue(settings.players);
+      this.playerNames.setValue(settings.players.map(pl => pl.name));
     }
   }
 
@@ -75,11 +76,20 @@ export class SettingsComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const players: IPlayer[] = this.playerNames.value.map((value: string) => {
+      return {
+        name: value,
+        announcement: -1,
+        actual: -1,
+        pointsHistory: []
+      };
+    });
+
     const setting: ISetting = {
       highestDouble: this.highestDouble.value,
       lowestDouble: this.lowestDouble.value,
       maxCards: this.maxCards.value,
-      players: this.playerNames.value
+      players
     };
     localStorage.setItem('gameSetting', JSON.stringify(setting));
   }
