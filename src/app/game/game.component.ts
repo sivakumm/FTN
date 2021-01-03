@@ -18,6 +18,8 @@ export class GameComponent implements OnInit {
   doublePlay = false;
   gameProcess = 0;
 
+  bombValue = -1;
+
   constructor(private utilService: UtilService) { }
 
   ngOnInit(): void {
@@ -107,6 +109,20 @@ export class GameComponent implements OnInit {
     } else {
       this.asc = !this.asc;
       this.asc ? this.cards++ : this.cards--;
+    }
+  }
+
+  bombClicked(): void {
+    if (this.bombValue < 0) {
+      this.bombValue = this.cards + 1;
+    } else {
+      this.settings.players[this.playerIdx].actual = this.bombValue;
+      this.bombValue = -1;
+      this.nextPlayerIdx();
+      if (this.playerIdx === 0) {
+        this.gameProcess++;
+        this.evaluateRound();
+      }
     }
   }
 }

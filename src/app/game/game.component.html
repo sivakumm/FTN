@@ -45,6 +45,15 @@
             {{ number }}
           </button>
         </div>
+        <div *ngIf="gameProcess === 1" class="selection-item">
+          <button
+            class="btn bg-warning text-black fw-bold fs-1 border border-dark border-3 selection-button"
+            (click)="bombClicked()"
+          >
+          <i class="fas fa-bomb"></i>
+          </button>
+          <input *ngIf="bombValue >= 0" type="number" [min]="cards" class="form-control" [(ngModel)]="bombValue">
+        </div>
       </div>
     </div>
   </div>
