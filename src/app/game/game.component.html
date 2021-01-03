@@ -17,7 +17,8 @@
         <tbody>
           <tr *ngFor="let player of settings.players">
             <td>{{ player.name }}</td>
-            <td>{{ player.announcement < 0 ? '...' : player.announcement }}</td>
+            <td *ngIf="settings.cards > 1">{{ player.announcement < 0 ? '...' : player.announcement }}</td>
+            <td *ngIf="settings.cards === 1">{{ player.announcement < 0 ? '...' : (player.announcement === 0 ? 'Lower' : 'Highest') }}</td>
           </tr>
         </tbody>
       </table>
