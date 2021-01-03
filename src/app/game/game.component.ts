@@ -1,3 +1,4 @@
+import { IPlayer } from './../interfaces/player.interface';
 import { UtilService } from './../service/util.service';
 import { Component, OnInit } from '@angular/core';
 import { ISetting } from '../interfaces/setting.interface';
@@ -72,6 +73,7 @@ export class GameComponent implements OnInit {
     this.evaluatePoints();
     this.settings.round++;
     this.setNextCards();
+    this.setNextPlayers();
     this.utilService.saveGameState(this.settings);
   }
 
@@ -79,6 +81,15 @@ export class GameComponent implements OnInit {
     this.settings.players.forEach(player => {
       player.currentPoints = player.pointsHistory.reduce((acc, curr) => acc + curr);
     });
+  }
+
+  setNextPlayers(): void {
+    const players: IPlayer[] = JSON.parse(JSON.stringify(this.settings.players));
+    const maxVal = players.map(pl => pl.pointsHistory[pl.pointsHistory.length - 1])
+                          .reduce((prev, curr) => prev = curr > prev ? curr : prev);
+    const winnderIdx = this.settings.players.findIndex(pl => pl.pointsHistory[pl.pointsHistory.length - 1] === maxVal);
+    const rotation = this.settings.players.splice(winnderIdx);
+    this.settings.players.unshift(...rotation);
   }
 
   startNextRound(): void {
