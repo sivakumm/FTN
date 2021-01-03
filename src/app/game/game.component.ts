@@ -58,7 +58,7 @@ export class GameComponent implements OnInit {
 
   evaluateRound(): void {
     this.settings.players.forEach(player => {
-      if (this.settings.cards === 0) {
+      if (this.settings.cards === 1) {
         player.pointsHistory.push(player.announcement === player.actual ? 5 : -5);
       } else {
         if (player.announcement === player.actual) {
@@ -70,6 +70,9 @@ export class GameComponent implements OnInit {
     });
     this.settings.players.forEach(player => { player.actual = -1; player.announcement = -1; });
     this.evaluatePoints();
+    this.settings.round++;
+    this.setNextCards();
+    this.utilService.saveGameState(this.settings);
   }
 
   evaluatePoints(): void {
@@ -82,9 +85,6 @@ export class GameComponent implements OnInit {
     this.gameProcess = 0;
     this.playerIdx = 0;
     this.disabledNr = -1;
-    this.settings.round++;
-    this.setNextCards();
-    this.utilService.saveGameState(this.settings);
   }
 
   setNextCards(): void {
