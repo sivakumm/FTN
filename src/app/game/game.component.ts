@@ -1,3 +1,4 @@
+import { UtilService } from './../service/util.service';
 import { Component, OnInit } from '@angular/core';
 import { ISetting } from '../interfaces/setting.interface';
 
@@ -17,12 +18,12 @@ export class GameComponent implements OnInit {
   doublePlay = false;
   gameProcess = 0;
 
-  constructor() { }
+  constructor(private utilService: UtilService) { }
 
   ngOnInit(): void {
-    const storage = localStorage.getItem('gameSetting');
-    if (storage !== null) {
-      this.settings = JSON.parse(storage);
+    const settings = this.utilService.loadGameState();
+    if (settings !== null) {
+      this.settings = settings;
       this.gameProcess = 0;
     }
   }
@@ -81,6 +82,7 @@ export class GameComponent implements OnInit {
     this.disabledNr = -1;
     this.round++;
     this.setNextCards();
+    this.utilService.saveGameState(this.settings);
   }
 
   setNextCards(): void {

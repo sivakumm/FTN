@@ -1,3 +1,4 @@
+import { UtilService } from './../service/util.service';
 import { IPlayer } from './../interfaces/player.interface';
 import { ISetting } from './../interfaces/setting.interface';
 import { Component, OnInit } from '@angular/core';
@@ -14,15 +15,14 @@ export class SettingsComponent implements OnInit {
 
   settingsForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private utilService: UtilService) {
     this.settingsForm = this.fb.group({});
   }
 
   ngOnInit(): void {
     this.initializeForm();
-    const storage = localStorage.getItem('gameSetting');
-    if (storage !== null) {
-      const settings: ISetting = JSON.parse(storage);
+    const settings: ISetting | null = this.utilService.loadGameState();
+    if (settings !== null) {
       this.maxCards.setValue(settings.maxCards);
       this.highestDouble.setValue(settings.highestDouble);
       this.lowestDouble.setValue(settings.lowestDouble);
@@ -91,6 +91,6 @@ export class SettingsComponent implements OnInit {
       maxCards: this.maxCards.value,
       players
     };
-    localStorage.setItem('gameSetting', JSON.stringify(setting));
+    this.utilService.saveGameState(setting);
   }
 }
