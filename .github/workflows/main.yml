@@ -67,7 +67,7 @@ jobs:
           npm install -g @angular/cli
           npm ci
           ls -l
-          ng deploy --repo=https://github.com/sivakumm/FTN.git --name=sivakumm --email=$EMAIL --message="Built from ${GITHUB_SHA} in the source repository." --branch=master
+          ng deploy --repo=https://github.com/sivakumm/FTN.git --name=sivakumm --email=$EMAIL -base-href=/FTN/ --message="Built from ${GITHUB_SHA} in the source repository." --branch=master
         env:
           CI: true
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
