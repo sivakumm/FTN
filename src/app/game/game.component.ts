@@ -13,6 +13,8 @@ export class GameComponent implements OnInit {
   cards = 1;
   playerIdx = 0;
   disabledNr = -1;
+  asc = false;
+  doublePlay = false;
   gameProcess = 0;
 
   constructor() { }
@@ -71,14 +73,38 @@ export class GameComponent implements OnInit {
     this.settings.players.forEach(player => {
       player.currentPoints = player.pointsHistory.reduce((acc, curr) => acc + curr);
     });
-    console.table(this.settings.players);
   }
 
   startNextRound(): void {
     this.gameProcess = 0;
     this.playerIdx = 0;
     this.disabledNr = -1;
-    this.cards = (this.cards + 1) % this.settings.maxCards;
     this.round++;
+    this.setNextCards();
+  }
+
+  setNextCards(): void {
+    if (this.cards === 1) {
+      this.handleDoublePlay(this.settings.lowestDouble);
+    } else if (this.cards === this.settings.maxCards) {
+      this.handleDoublePlay(this.settings.highestDouble);
+    } else {
+      this.asc ? this.cards++ : this.cards--;
+    }
+  }
+
+  handleDoublePlay(setting: boolean): void {
+    if (setting) {
+      if (this.doublePlay) {
+        this.doublePlay = false;
+        this.asc = !this.asc;
+        this.asc ? this.cards++ : this.cards--;
+      } else {
+        this.doublePlay = true;
+      }
+    } else {
+      this.asc = !this.asc;
+      this.asc ? this.cards++ : this.cards--;
+    }
   }
 }
