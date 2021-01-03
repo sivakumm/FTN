@@ -21,7 +21,6 @@ export class ChartComponent implements OnInit {
     if (this.settings) {
       this.colors = this.settings?.players.map(_ => '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6));
     }
-    console.log(JSON.stringify(this.settings?.players));
     this.initializeCharts();
   }
 
