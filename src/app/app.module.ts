@@ -6,12 +6,14 @@ import { AppComponent } from './app-component/app.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GameComponent } from './game/game.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SettingsComponent,
-    GameComponent
+    GameComponent,
+    MenuComponent
   ],
   imports: [
     AppRoutingModule,
