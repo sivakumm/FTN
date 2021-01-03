@@ -19,6 +19,8 @@
             class="btn bg-secondary text-white fw-bold fs-3 border border-dark border-3 selection-button"
             (click)="makeChoise(number)"
             [disabled]="disabledNr === number"
+            [class.bg-danger]="disabledNr === number"
+            [class.bg-success]="gameProcess > 0"
           >
             {{ number }}
           </button>
