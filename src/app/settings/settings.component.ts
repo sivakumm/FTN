@@ -92,7 +92,11 @@ export class SettingsComponent implements OnInit {
       highestDouble: this.highestDouble.value,
       lowestDouble: this.lowestDouble.value,
       maxCards: this.maxCards.value,
-      players
+      players,
+      round: 1,
+      cards: 1,
+      asc: false,
+      doublePlay: false
     };
     this.utilService.saveGameState(setting);
     this.router.navigateByUrl('/game');

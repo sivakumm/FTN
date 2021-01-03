@@ -5,4 +5,8 @@ export interface ISetting {
   maxCards: number;
   highestDouble: boolean;
   lowestDouble: boolean;
+  round: number;
+  cards: number;
+  asc: boolean;
+  doublePlay: boolean;
 }

@@ -21,6 +21,10 @@ export class MenuComponent implements OnInit {
   newGame(): void {
     if (this.settings !== null) {
       this.settings.players.forEach(pl => pl.pointsHistory = []);
+      this.settings.round = 1;
+      this.settings.cards = 1;
+      this.settings.asc = false;
+      this.settings.doublePlay = false;
       this.utilService.saveGameState(this.settings);
       this.router.navigateByUrl('/game');
     }

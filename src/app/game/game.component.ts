@@ -10,12 +10,8 @@ import { ISetting } from '../interfaces/setting.interface';
 export class GameComponent implements OnInit {
 
   settings!: ISetting;
-  round = 1;
-  cards = 1;
   playerIdx = 0;
   disabledNr = -1;
-  asc = false;
-  doublePlay = false;
   gameProcess = 0;
 
   bombValue = -1;
@@ -31,7 +27,7 @@ export class GameComponent implements OnInit {
   }
 
   choises(): number[] {
-    return Array.from({ length: this.cards + 1 }, (_, idx) => idx);
+    return Array.from({ length: this.settings.cards + 1 }, (_, idx) => idx);
   }
 
   makeChoise(value: number): void {
@@ -39,7 +35,7 @@ export class GameComponent implements OnInit {
       this.settings.players[this.playerIdx].announcement = value;
       this.nextPlayerIdx();
       if (this.playerIdx === this.settings.players.length - 1) {
-        this.disabledNr = (this.cards - this.settings.players.map(player => player.announcement)
+        this.disabledNr = (this.settings.cards - this.settings.players.map(player => player.announcement)
           .reduce((prev, curr) => prev = curr >= 0 ? prev + curr : prev));
       }
       if (this.playerIdx === 0) {
@@ -82,39 +78,39 @@ export class GameComponent implements OnInit {
     this.gameProcess = 0;
     this.playerIdx = 0;
     this.disabledNr = -1;
-    this.round++;
+    this.settings.round++;
     this.setNextCards();
     this.utilService.saveGameState(this.settings);
   }
 
   setNextCards(): void {
-    if (this.cards === 1) {
+    if (this.settings.cards === 1) {
       this.handleDoublePlay(this.settings.lowestDouble);
-    } else if (this.cards === this.settings.maxCards) {
+    } else if (this.settings.cards === this.settings.maxCards) {
       this.handleDoublePlay(this.settings.highestDouble);
     } else {
-      this.asc ? this.cards++ : this.cards--;
+      this.settings.asc ? this.settings.cards++ : this.settings.cards--;
     }
   }
 
   handleDoublePlay(setting: boolean): void {
     if (setting) {
-      if (this.doublePlay) {
-        this.doublePlay = false;
-        this.asc = !this.asc;
-        this.asc ? this.cards++ : this.cards--;
+      if (this.settings.doublePlay) {
+        this.settings.doublePlay = false;
+        this.settings.asc = !this.settings.asc;
+        this.settings.asc ? this.settings.cards++ : this.settings.cards--;
       } else {
-        this.doublePlay = true;
+        this.settings.doublePlay = true;
       }
     } else {
-      this.asc = !this.asc;
-      this.asc ? this.cards++ : this.cards--;
+      this.settings.asc = !this.settings.asc;
+      this.settings.asc ? this.settings.cards++ : this.settings.cards--;
     }
   }
 
   bombClicked(): void {
     if (this.bombValue < 0) {
-      this.bombValue = this.cards + 1;
+      this.bombValue = this.settings.cards + 1;
     } else {
       this.settings.players[this.playerIdx].actual = this.bombValue;
       this.bombValue = -1;
