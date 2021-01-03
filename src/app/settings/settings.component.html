@@ -1,13 +1,30 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col">
-      <h3 class="text-center">Settings</h3>
+      <h3 class="text-center"><i class="fas fa-tools me-2"></i>Settings</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-start">
+      <button class="btn btn-primary"><i class="fas fa-angle-left"></i></button>
+    </div>
+    <div class="col text-end">
+      <button class="btn btn-danger" (click)="initializeForm()"><i class="fas fa-trash"></i></button>
+    </div>
+  </div>
+  <hr />
+  <div *ngIf="settingsFound" class="row">
+    <div class="col">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        Previous settings were found.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="removeAlert()"></button>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col">
       <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
-        <button class="btn btn-primary mt-4 w-100" type="button" (click)="addPlayer()">
+        <button class="btn btn-primary w-100" type="button" (click)="addPlayer()">
           <i class="fas fa-user-plus me-2"></i>
           Add Player
         </button>
@@ -17,7 +34,7 @@
               class="form-label col-12 col-md-3"
               [for]="'player-name-' + playerIdx"
             >
-              Player {{ playerIdx + 1 }}
+              <i class="fas fa-user ms-1 me-2"></i>Player {{ playerIdx + 1 }}
             </label>
             <input
               class="form-control col"
@@ -83,10 +100,11 @@
           </div>
         </div>
         <hr />
-        <button class="btn btn-primary w-100" type="submit" [disabled]="!isValidInputs()">
+        <button class="btn btn-success w-100" type="submit" [disabled]="!isValidInputs()">
           <i class="fas fa-play-circle me-2"></i>Start
         </button>
       </form>
     </div>
   </div>
+  <div class="row"><div class="col">&nbsp;</div></div>
 </div>

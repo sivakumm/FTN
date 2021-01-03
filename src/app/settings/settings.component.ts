@@ -14,6 +14,7 @@ export class SettingsComponent implements OnInit {
   NR_OF_CARDS = 52;
 
   settingsForm: FormGroup;
+  settingsFound = false;
 
   constructor(private fb: FormBuilder, private utilService: UtilService) {
     this.settingsForm = this.fb.group({});
@@ -27,6 +28,7 @@ export class SettingsComponent implements OnInit {
       this.highestDouble.setValue(settings.highestDouble);
       this.lowestDouble.setValue(settings.lowestDouble);
       this.playerNames.setValue(settings.players.map(pl => pl.name));
+      this.settingsFound = true;
     }
   }
 
@@ -92,5 +94,9 @@ export class SettingsComponent implements OnInit {
       players
     };
     this.utilService.saveGameState(setting);
+  }
+
+  removeAlert(): void {
+    this.settingsFound = false;
   }
 }
