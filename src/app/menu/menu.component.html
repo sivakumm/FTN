@@ -1,13 +1,13 @@
 <div class="mt-3">
   <div class="flex-container">
-    <div class="flex-item">
+    <div *ngIf="settings !== null" class="flex-item">
       <button class="btn btn-success w-75 fw-bold" [disabled]="settings === null" (click)="newGame()"><i class="fas fa-play-circle me-3"></i>New Game</button>
     </div>
     <div class="flex-item">
       <button class="btn btn-primary w-75 fw-bold" (click)="doSettings()"><i class="fas fa-tools me-2"></i>Settings</button>
     </div>
     <div *ngIf="settings !== null" class="flex-item">
-      <button class="btn btn-warning w-75 fw-bold" (click)="resumeGame()"><i class="fas fa-forward me-2"></i>Resume Game</button>
+      <button class="btn btn-warning w-75 fw-bold" [disabled]="settings === null" (click)="resumeGame()"><i class="fas fa-forward me-2"></i>Resume Game</button>
     </div>
   </div>
 </div>
