@@ -62,12 +62,12 @@ jobs:
         with:
           node-version: 12.x
 
-      - name: npm install, build, and test
-      run: |
-        npm install -g @angular/cli
-        npm ci
-        ng deploy --repo=https://github.com/sivakumm/FTN.git --name=sivakumm --email=$EMAIL --message="Built from ${GITHUB_SHA} in the source repository." --branch=master
-      env:
-        CI: true
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        EMAIL: ${{ secrets.EMAIL }}
+      - name: npm install & deploy
+        run: |
+          npm install -g @angular/cli
+          npm ci
+          ng deploy --repo=https://github.com/sivakumm/FTN.git --name=sivakumm --email=$EMAIL --message="Built from ${GITHUB_SHA} in the source repository." --branch=master
+        env:
+          CI: true
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          EMAIL: ${{ secrets.EMAIL }}
