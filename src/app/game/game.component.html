@@ -13,7 +13,27 @@
   </div>
   <div *ngIf="gameProcess < 2" class="row">
     <div class="col">
-      <div class="selection-container">
+      <div *ngIf="cards === 1" class="selection-container">
+        <div class="selection-item">
+          <button
+            class="btn bg-secondary text-white fw-bold fs-3 border border-dark border-3 selection-button"
+            (click)="makeChoise(0)"
+            [class.bg-success]="gameProcess > 0"
+          >
+            Lower
+          </button>
+        </div>
+        <div class="selection-item">
+          <button
+            class="btn bg-secondary text-white fw-bold fs-5 border border-dark border-3 selection-button text-center"
+            (click)="makeChoise(1)"
+            [class.bg-success]="gameProcess > 0"
+          >
+            Highest
+          </button>
+        </div>
+      </div>
+      <div *ngIf="cards > 1" class="selection-container">
         <div class="selection-item" *ngFor="let number of choises()">
           <button
             class="btn bg-secondary text-white fw-bold fs-3 border border-dark border-3 selection-button"
