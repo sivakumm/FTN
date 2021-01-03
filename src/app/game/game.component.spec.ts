@@ -1,3 +1,5 @@
+import { UtilService } from './../service/util.service';
+import { ISetting } from './../interfaces/setting.interface';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GameComponent } from './game.component';
@@ -8,7 +10,10 @@ describe('GameComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GameComponent ]
+      declarations: [ GameComponent ],
+      providers: [
+        { provide: UtilService, useClass: MockUtilSerivce }
+      ]
     })
     .compileComponents();
   });
@@ -23,3 +28,20 @@ describe('GameComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+class MockUtilSerivce {
+  loadGameState(): ISetting | null {
+    return {
+      highestDouble: true,
+      lowestDouble: false,
+      maxCards: 8,
+      players: [{
+        actual: -1,
+        announcement: -1,
+        name: 'Mock Name',
+        pointsHistory: [],
+        currentPoints: 0
+      }]
+    };
+  }
+}
