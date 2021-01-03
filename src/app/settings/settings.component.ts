@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UtilService } from './../service/util.service';
 import { IPlayer } from './../interfaces/player.interface';
 import { ISetting } from './../interfaces/setting.interface';
@@ -16,7 +17,7 @@ export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
   settingsFound = false;
 
-  constructor(private fb: FormBuilder, private utilService: UtilService) {
+  constructor(private fb: FormBuilder, private utilService: UtilService, private router: Router) {
     this.settingsForm = this.fb.group({});
   }
 
@@ -94,14 +95,10 @@ export class SettingsComponent implements OnInit {
       players
     };
     this.utilService.saveGameState(setting);
-    // this.utilService.setPageState(2);
+    this.router.navigateByUrl('/game');
   }
 
   removeAlert(): void {
     this.settingsFound = false;
-  }
-
-  goToMainMenu(): void {
-    // this.utilService.setPageState(0);
   }
 }
