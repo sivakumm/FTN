@@ -58,10 +58,14 @@ export class GameComponent implements OnInit {
 
   evaluateRound(): void {
     this.settings.players.forEach(player => {
-      if (player.announcement === player.actual) {
-        player.pointsHistory.push(player.announcement * 5 + 5);
+      if (this.settings.cards === 0) {
+        player.pointsHistory.push(player.announcement === player.actual ? 5 : -5);
       } else {
-        player.pointsHistory.push(Math.abs(player.announcement - player.actual) * -5);
+        if (player.announcement === player.actual) {
+          player.pointsHistory.push(player.announcement * 5 + 5);
+        } else {
+          player.pointsHistory.push(Math.abs(player.announcement - player.actual) * -5);
+        }
       }
     });
     this.settings.players.forEach(player => { player.actual = -1; player.announcement = -1; });
