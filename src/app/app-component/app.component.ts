@@ -1,22 +1,22 @@
-import { UtilService } from './../service/util.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
-  page = 0;
+  currentPath = '';
 
-  constructor(private utilService: UtilService) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.utilService.pageState.subscribe(pg => this.page = pg);
-  }
-
-  ngOnDestroy(): void {
-    this.utilService.pageState.unsubscribe();
+    this.router.events.subscribe(events => {
+      if (events instanceof NavigationEnd) {
+        this.currentPath = events.urlAfterRedirects;
+      }
+    });
   }
 }

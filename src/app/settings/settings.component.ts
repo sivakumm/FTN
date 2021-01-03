@@ -94,7 +94,7 @@ export class SettingsComponent implements OnInit {
       players
     };
     this.utilService.saveGameState(setting);
-    this.utilService.setPageState(2);
+    // this.utilService.setPageState(2);
   }
 
   removeAlert(): void {
@@ -102,6 +102,6 @@ export class SettingsComponent implements OnInit {
   }
 
   goToMainMenu(): void {
-    this.utilService.setPageState(0);
+    // this.utilService.setPageState(0);
   }
 }

@@ -1,6 +1,7 @@
 import { ISetting } from './../interfaces/setting.interface';
 import { UtilService } from './../service/util.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +12,7 @@ export class MenuComponent implements OnInit {
 
   settings: ISetting | null = null;
 
-  constructor(private utilService: UtilService) { }
+  constructor(private utilService: UtilService, private router: Router) { }
 
   ngOnInit(): void {
     this.settings = this.utilService.loadGameState();
@@ -21,23 +22,23 @@ export class MenuComponent implements OnInit {
     if (this.settings !== null) {
       this.settings.players.forEach(pl => pl.pointsHistory = []);
       this.utilService.saveGameState(this.settings);
-      this.utilService.setPageState(2);
+      this.router.navigateByUrl('/game');
     }
   }
 
   doSettings(): void {
-    this.utilService.setPageState(1);
+    this.router.navigateByUrl('/settings');
   }
 
   resumeGame(): void {
     if (this.settings !== null) {
-      this.utilService.setPageState(2);
+      this.router.navigateByUrl('/game');
     }
   }
 
   showHistory(): void {
     if (this.settings !== null) {
-      this.utilService.setPageState(3);
+      this.router.navigateByUrl('/charts');
     }
   }
 }

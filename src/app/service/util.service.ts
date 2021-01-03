@@ -7,8 +7,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class UtilService {
 
-  pageState: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-
   constructor() { }
 
   saveGameState(settings: ISetting): void {
@@ -25,9 +23,5 @@ export class UtilService {
 
   resetGameState(): void {
     localStorage.clear();
-  }
-
-  setPageState(page: number): void {
-    this.pageState.next(page);
   }
 }
