@@ -5,6 +5,24 @@
       <h6 class="text-center">{{ settings.cards }} card{{ settings.cards > 1 ? 's' : '' }}</h6>
     </div>
   </div>
+  <div *ngIf="gameProcess < 2" class="row my-3">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Announcement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let player of settings.players">
+            <td>{{ player.name }}</td>
+            <td>{{ player.announcement < 0 ? '...' : player.announcement }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <div class="row mt-5">
     <div class="col">
       <h4 *ngIf="gameProcess < 2" class="text-center">{{ gameProcess === 0 ? 'Announcement' : 'Won decks' }} of {{ settings.players[playerIdx].name }}</h4>
