@@ -1,10 +1,13 @@
 import { ISetting } from './../interfaces/setting.interface';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilService {
+
+  pageState: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor() { }
 
@@ -22,5 +25,9 @@ export class UtilService {
 
   resetGameState(): void {
     localStorage.clear();
+  }
+
+  setPageState(page: number): void {
+    this.pageState.next(page);
   }
 }

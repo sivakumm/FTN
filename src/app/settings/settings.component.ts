@@ -94,9 +94,14 @@ export class SettingsComponent implements OnInit {
       players
     };
     this.utilService.saveGameState(setting);
+    this.utilService.setPageState(2);
   }
 
   removeAlert(): void {
     this.settingsFound = false;
+  }
+
+  goToMainMenu(): void {
+    this.utilService.setPageState(0);
   }
 }

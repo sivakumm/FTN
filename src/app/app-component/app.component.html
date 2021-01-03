@@ -5,8 +5,8 @@
     </div>
   </div>
   <div>
-    <!-- <app-settings></app-settings> -->
-    <!-- <app-game></app-game> -->
-    <app-menu></app-menu>
+    <app-menu *ngIf="page === 0"></app-menu>
+    <app-settings *ngIf="page === 1"></app-settings>
+    <app-game *ngIf="page === 2"></app-game>
   </div>
 </div>
