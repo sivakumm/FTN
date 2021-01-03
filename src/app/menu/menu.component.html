@@ -9,5 +9,8 @@
     <div *ngIf="settings !== null" class="flex-item">
       <button class="btn btn-warning w-75 fw-bold" [disabled]="settings === null" (click)="resumeGame()"><i class="fas fa-forward me-2"></i>Resume Game</button>
     </div>
+    <div *ngIf="settings !== null" class="flex-item">
+      <button class="btn btn-secondary w-75 fw-bold" [disabled]="settings === null" (click)="showHistory()"><i class="fas fa-chart-line me-2"></i>Chart</button>
+    </div>
   </div>
 </div>

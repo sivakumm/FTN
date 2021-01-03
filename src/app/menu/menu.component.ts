@@ -34,4 +34,10 @@ export class MenuComponent implements OnInit {
       this.utilService.setPageState(2);
     }
   }
+
+  showHistory(): void {
+    if (this.settings !== null) {
+      this.utilService.setPageState(3);
+    }
+  }
 }

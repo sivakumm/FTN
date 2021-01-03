@@ -7,13 +7,15 @@ import { SettingsComponent } from './settings/settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GameComponent } from './game/game.component';
 import { MenuComponent } from './menu/menu.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SettingsComponent,
     GameComponent,
-    MenuComponent
+    MenuComponent,
+    ChartComponent
   ],
   imports: [
     AppRoutingModule,
